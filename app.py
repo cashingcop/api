@@ -34,6 +34,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("")
+def check():
+    return {"Hello": "Deployed bro"}
+
 @app.get("/api/version")
 def check():
     return {"Hello": "Actual v1. Working"}
