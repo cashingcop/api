@@ -4,6 +4,7 @@ from dates_translator import Translator
 from name_cleaner import Cleaner
 import pickle
 import tensorflow as tf
+from fastapi.middleware.cors import CORSMiddleware
 
 # LOAD ALL 
 
@@ -24,6 +25,14 @@ loaded_transformer = loaded.signatures['serving_default']
 
 # INit the app
 app = FastAPI()
+origins = ["*"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/api/version")
 def check():
